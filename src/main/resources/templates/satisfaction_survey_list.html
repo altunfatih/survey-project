@@ -11,7 +11,9 @@
 		<div>
 			<h1>Satisfaction Survey List</h1>
 		</div>
-		
+		<button type = "button">
+			<a th:href="@{'/api/satisfactionsurvey/new/'}">Satisfaction Survey New</a>
+		</button> <br><br>
 		<div>
 			<table class="table table-bordered">
 				<thead class="thead-dark">
@@ -40,10 +42,9 @@
 							<td>[[${satisfactionsurvey.thingsHappy}]]</td>
 							<td>[[${satisfactionsurvey.thingsUnhappy}]]</td>
 							<td>[[${satisfactionsurvey.pollster}]]</td>
-							<td>
-							<a th:href="@{'/api/satisfactionsurvey/delete/' + ${satisfactionsurvey.id}}">Delete</a>
-						</td>
-						</tr>
+							<td><a
+								th:href="@{'/api/satisfactionsurvey/delete/' + ${satisfactionsurvey.id}}">Delete</a>
+							</td>
 					</th:block>
 				</tbody>
 			</table>

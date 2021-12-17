@@ -11,7 +11,9 @@
 		<div>
 			<h1>Football Survey List</h1>
 		</div>
-		
+		<button type = "button">
+			<a th:href="@{'/api/footballsurvey/new/'}">Football Survey New</a>
+		</button> <br><br>
 		<div>
 			<table class="table table-bordered">
 				<thead class="thead-dark">
@@ -38,9 +40,9 @@
 							<td>[[${footballsurvey.statement}]]</td>
 							<td>[[${footballsurvey.favoriteTeam}]]</td>
 							<td>[[${footballsurvey.pollster}]]</td>
-							<td>
-							<a th:href="@{'/api/footballsurvey/delete/' + ${footballsurvey.id}}">Delete</a>
-						</td>
+							<td><a
+								th:href="@{'/api/footballsurvey/delete/' + ${footballsurvey.id}}">Delete</a>
+							</td>
 						</tr>
 					</th:block>
 				</tbody>
