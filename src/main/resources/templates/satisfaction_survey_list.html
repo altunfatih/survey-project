@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>List Satisfaction Survey</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container text-center">
+		<div>
+			<h1>Satisfaction Survey List</h1>
+		</div>
+		
+		<div>
+			<table class="table table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Surname</th>
+						<th>Gender</th>
+						<th>Date</th>
+						<th>Statement</th>
+						<th>Things Happy</th>
+						<th>Things Unhappy</th>
+						<th>Pollster Id</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<th:block th:each="satisfactionsurvey : ${listSatisfactionSurvey}">
+						<tr>
+							<td>[[${satisfactionsurvey.id}]]</td>
+							<td>[[${satisfactionsurvey.name}]]</td>
+							<td>[[${satisfactionsurvey.surname}]]</td>
+							<td>[[${satisfactionsurvey.gender}]]</td>
+							<td>[[${satisfactionsurvey.date}]]</td>
+							<td>[[${satisfactionsurvey.statement}]]</td>
+							<td>[[${satisfactionsurvey.thingsHappy}]]</td>
+							<td>[[${satisfactionsurvey.thingsUnhappy}]]</td>
+							<td>[[${satisfactionsurvey.pollster}]]</td>
+							<td>
+							<a th:href="@{'/api/satisfactionsurvey/delete/' + ${satisfactionsurvey.id}}">Delete</a>
+						</td>
+						</tr>
+					</th:block>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

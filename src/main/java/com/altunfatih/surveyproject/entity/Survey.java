@@ -2,7 +2,6 @@ package com.altunfatih.surveyproject.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -11,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,8 +32,8 @@ public class Survey {
 	
 	@Enumerated
 	private Gender gender;
-	
-	private Date date;
+
+	private String date;
 	private String statement;
 	
 	@ManyToOne

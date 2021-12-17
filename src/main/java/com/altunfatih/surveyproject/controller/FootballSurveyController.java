@@ -3,43 +3,48 @@ package com.altunfatih.surveyproject.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.altunfatih.surveyproject.entity.FootballSurvey;
 import com.altunfatih.surveyproject.service.FootballSurveyService;
 
-@RestController
-@RequestMapping("/api/football")
+@Controller
+@RequestMapping("/api/footballsurvey")
 public class FootballSurveyController {
 	@Autowired
 	private FootballSurveyService footballSurveyService;
 	
-	@PostMapping("/save")
-	public ResponseEntity<FootballSurvey> addFootballSurvey(@RequestBody FootballSurvey footballSurvey) {
-		FootballSurvey addfootballSurvey = footballSurveyService.addFootballSurvey(footballSurvey);
-		
-		return new ResponseEntity<FootballSurvey>(addfootballSurvey, HttpStatus.CREATED);
+	@GetMapping("/list")
+	public String getAllListFootballSurvey(Model model) {
+		List<FootballSurvey> allFootballSurvey = footballSurveyService.findAllFootballSurvey();
+		model.addAttribute("listFootballSurvey", allFootballSurvey);
+
+		return "football_survey_list";
 	}
-	
-	@GetMapping("/all")
-    public ResponseEntity<List<FootballSurvey>> getAllFootballSurvey(){
-        List<FootballSurvey> allFootballSurvey = footballSurveyService.findAllFootballSurvey();
-        
-        return new ResponseEntity<List<FootballSurvey>>(allFootballSurvey, HttpStatus.OK);
-    }
-	
-	@DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteFootballSurveyById(@PathVariable("id") Long id){
-        footballSurveyService.deleteFootballSurveyById(id);
-        
-        return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
-    }
+
+	@GetMapping("/new")
+	public String showFootballSurveyNewForm(Model model) {
+		model.addAttribute("footballsurvey", new FootballSurvey());
+
+		return "football_survey_form";
+	}
+
+	@PostMapping("/save")
+	public String saveFootballSurvey(FootballSurvey footballSurvey) {
+		footballSurveyService.addFootballSurvey(footballSurvey);
+
+		return "redirect:/api/footballsurvey/list";
+	}
+
+	@GetMapping("/delete/{id}")
+	public String deleteFootballSurveyForm(@PathVariable("id") Long id, Model model) {
+		footballSurveyService.deleteFootballSurveyById(id);
+
+		return "redirect:/api/footballsurvey/list";
+	}
 }

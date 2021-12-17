@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>List Football Survey</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container text-center">
+		<div>
+			<h1>Football Survey List</h1>
+		</div>
+		
+		<div>
+			<table class="table table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Surname</th>
+						<th>Gender</th>
+						<th>Date</th>
+						<th>Statement</th>
+						<th>Favorite Team</th>
+						<th>Pollster Id</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<th:block th:each="footballsurvey : ${listFootballSurvey}">
+						<tr>
+							<td>[[${footballsurvey.id}]]</td>
+							<td>[[${footballsurvey.name}]]</td>
+							<td>[[${footballsurvey.surname}]]</td>
+							<td>[[${footballsurvey.gender}]]</td>
+							<td>[[${footballsurvey.date}]]</td>
+							<td>[[${footballsurvey.statement}]]</td>
+							<td>[[${footballsurvey.favoriteTeam}]]</td>
+							<td>[[${footballsurvey.pollster}]]</td>
+							<td>
+							<a th:href="@{'/api/footballsurvey/delete/' + ${footballsurvey.id}}">Delete</a>
+						</td>
+						</tr>
+					</th:block>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
